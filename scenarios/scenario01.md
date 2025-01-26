@@ -1,0 +1,5 @@
+# Scenario 01 - Identity & Access Management
+
+Your team is responsible for one or more microservices used for identity & access management as part of a large online banking system. The microservices in question will be responsible for authenticating users into the online banking system using one or more verification procedures that you recommend. Additionally, your microservice(s) will provide a centralized location used by the bank to administer authorization (what an authenticated user can and cannot do).
+
+Your microservices may utilize 3rd party applications or systems behind the scenes for common utilities and functions. However, due to regulatory and audit concerns, the bank must create, control, and manage a custom-developed single entry point that all users will route through in order to complete any online banking functions. You should also consider how your IAM solution will be leveraged by the bank for the various workflows supported (consumer banking, mortages, credit cards, auto loans, and student loans).
