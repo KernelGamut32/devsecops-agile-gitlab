@@ -1,6 +1,5 @@
 # GitLab Labs
 
-* https://docs.gitlab.com/ee/ci/quick_start/index.html
 * https://docs.gitlab.com/ee/ci/quick_start/tutorial.html
 * https://docs.gitlab.com/ee/user/packages/pypi_repository/auto_publish_tutorial.html
 * https://docs.gitlab.com/ee/tutorials/setup_steps/index.html
