@@ -5,6 +5,5 @@
 * https://docs.gitlab.com/ee/tutorials/setup_steps/index.html
 * https://docs.gitlab.com/ee/tutorials/create_register_first_runner/index.html
 * https://docs.gitlab.com/ee/tutorials/dependency_scanning.html
-* https://docs.gitlab.com/ee/tutorials/scan_result_policy/index.html
 * https://docs.gitlab.com/ee/tutorials/container_scanning/index.html
-* https://university.gitlab.com/learn/course/hands-on-labs-gitlab-with-git-essentials/main/hands-on-challenge-gitlab-with-git-essentials
+* https://university.gitlab.com/learn/course/hands-on-lab-security-essentials/main/hands-on-challenge-gitlab-security-essentials
