@@ -1,0 +1,12 @@
+stages:
+- build
+- test
+- devsecops
+
+include:
+  - local: sec-scans.yml
+
+build:
+  stage: build
+  script:
+    - echo 'Doing IAC!!'

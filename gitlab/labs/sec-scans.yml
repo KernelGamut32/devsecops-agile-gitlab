@@ -1,0 +1,54 @@
+include:
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/SAST-IaC.gitlab-ci.yml
+
+gemnasium-dependency_scanning:
+  tags: [ saas-linux-large-amd64 ]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_IID
+  artifacts:
+    paths:
+      - gl-dependency-scanning-report.json
+
+container_scanning:
+  variables:
+    GIT_STRATEGY: fetch
+    CS_DOCKERFILE_PATH: "$CI_PROJECT_DIR/Dockerfile"
+    CS_IMAGE: $CI_REGISTRY_IMAGE/tutorial-image
+  artifacts:
+    paths:
+      - gl-container-scanning-report.json
+
+kics-iac-sast:
+  artifacts:
+    paths:
+      - gl-sast-report.json
+
+security_gate_ds:
+  stage: devsecops
+  script:
+    - apt-get update && apt-get -y install jq
+    - cat $CI_PROJECT_DIR/gl-dependency-scanning-report.json | jq '.vulnerabilities[] | select(.severity == "High" or .severity == "Critical" or .severity == "Unknown")' | grep . && exit 1 || exit 0
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_IID
+
+security_gate_cs:
+  stage: devsecops
+  script:
+    - apt-get update && apt-get -y install jq
+    - cat $CI_PROJECT_DIR/gl-container-scanning-report.json | jq '.vulnerabilities[] | select(.severity == "High" or .severity == "Critical" or .severity == "Unknown")' | grep . && exit 1 || exit 0
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_IID
+
+security_gate_iac:
+  stage: devsecops
+  script:
+    - apt-get update && apt-get -y install jq
+    - cat $CI_PROJECT_DIR/gl-sast-report.json | jq '.vulnerabilities[] | select(.severity == "High" or .severity == "Critical" or .severity == "Unknown")' | grep . && exit 1 || exit 0
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_IID
