@@ -152,6 +152,8 @@ Resources:
       GroupDescription: Enable ES access
       VpcId: !Ref 'VPC'
       SecurityGroupIngress:
+      - IpProtocol : -1
+        CidrIp: 0.0.0.0/0
       - IpProtocol: tcp
         FromPort: 443
         ToPort: 443
